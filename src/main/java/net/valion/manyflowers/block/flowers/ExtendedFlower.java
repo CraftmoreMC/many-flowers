@@ -1,5 +1,6 @@
 package net.valion.manyflowers.block.flowers;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -16,8 +17,16 @@ import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 public class ExtendedFlower extends BlockWithEntity implements BlockEntityProvider {
+
+    private final static MapCodec<ExtendedFlower> CODEC = createCodec(ExtendedFlower::new);
+
     protected ExtendedFlower(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override

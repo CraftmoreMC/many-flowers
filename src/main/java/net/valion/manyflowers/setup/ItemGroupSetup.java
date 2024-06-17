@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 import static net.valion.manyflowers.ManyFlowers.MOD_ID;
 
 public class ItemGroupSetup {
-    public static RegistryKey<ItemGroup> MANY_FLOWERS = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(MOD_ID));
+    public static RegistryKey<ItemGroup> MANY_FLOWERS = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(MOD_ID));
 
     public static void registerItemGroups() {
         Registry.register(

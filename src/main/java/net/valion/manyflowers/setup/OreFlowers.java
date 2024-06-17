@@ -1,8 +1,7 @@
 package net.valion.manyflowers.setup;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerBlock;
@@ -20,78 +19,78 @@ import static net.valion.manyflowers.ManyFlowers.MOD_ID;
 public class OreFlowers {
     public static final Block DIAMOND_FLOWER = registerBlock("diamond_flower",
             new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque()));
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
 
     public static final Block COAL_FLOWER = registerBlock("coal_flower",
             new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque()));
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
 
     public static final Block IRON_FLOWER = registerBlock("iron_flower",
             new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque()));
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
 
     public static final Block GOLD_FLOWER = registerBlock("gold_flower",
             new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque()));
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
 
     public static final Block EMERALD_FLOWER = registerBlock("emerald_flower",
             new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque()));
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
 
     public static final Block COPPER_FLOWER = registerBlock("copper_flower",
             new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque()));
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
 
     //Plants//
     public static final Block DIAMOND_PLANT = registerBlockWithoutBlockItem("diamond_plant",
-            new DiamondPlant(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
+            new DiamondPlant(AbstractBlock.Settings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
 
     public static final Block COAL_PLANT = registerBlockWithoutBlockItem("coal_plant",
-            new CoalPlant(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
+            new CoalPlant(AbstractBlock.Settings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
 
     public static final Block IRON_PLANT = registerBlockWithoutBlockItem("iron_plant",
-            new IronPlant(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
+            new IronPlant(AbstractBlock.Settings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
 
     public static final Block GOLD_PLANT = registerBlockWithoutBlockItem("gold_plant",
-            new GoldPlant(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
+            new GoldPlant(AbstractBlock.Settings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
 
     public static final Block EMERALD_PLANT = registerBlockWithoutBlockItem("emerald_plant",
-            new EmeraldPlant(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
+            new EmeraldPlant(AbstractBlock.Settings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
 
     public static final Block COPPER_PLANT = registerBlockWithoutBlockItem("copper_plant",
-            new CopperPlant(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
+            new CopperPlant(AbstractBlock.Settings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
 
     //Petal Blocks//
     public static final Block DIAMOND_PETAL_BLOCK = registerBlock("diamond_petal_block",
-            new Block(FabricBlockSettings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK)));
+            new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK)));
 
     public static final Block COAL_PETAL_BLOCK = registerBlock("coal_petal_block",
-            new Block(FabricBlockSettings.create().sounds(BlockSoundGroup.STONE)));
+            new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.STONE)));
 
     public static final Block IRON_PETAL_BLOCK = registerBlock("iron_petal_block",
-            new Block(FabricBlockSettings.create().sounds(BlockSoundGroup.METAL)));
+            new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.METAL)));
 
     public static final Block GOLD_PETAL_BLOCK = registerBlock("gold_petal_block",
-            new Block(FabricBlockSettings.create().sounds(BlockSoundGroup.METAL)));
+            new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.METAL)));
 
     public static final Block EMERALD_PETAL_BLOCK = registerBlock("emerald_petal_block",
-            new Block(FabricBlockSettings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK)));
+            new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK)));
 
     public static final Block COPPER_PETAL_BLOCK = registerBlock("copper_petal_block",
-            new Block(FabricBlockSettings.create().sounds(BlockSoundGroup.METAL)));
+            new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.METAL)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
-        return Registry.register(Registries.BLOCK, new Identifier(MOD_ID, name), block);
+        return Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, name), block);
     }
 
     private static void registerBlockItem(String name, Block block) {
-        Item item = Registry.register(Registries.ITEM, new Identifier(MOD_ID, name),
-                new BlockItem(block, new FabricItemSettings()));
+        Item item = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, name),
+                new BlockItem(block, new Item.Settings()));
         ItemGroupEvents.modifyEntriesEvent(ItemGroupSetup.MANY_FLOWERS).register(entries -> entries.add(item));
     }
 
     private static Block registerBlockWithoutBlockItem(String name, Block block){
-        return Registry.register(Registries.BLOCK, new Identifier(MOD_ID, name), block);
+        return Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, name), block);
     }
 }

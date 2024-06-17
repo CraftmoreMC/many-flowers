@@ -60,14 +60,14 @@ public class AutumnAsters extends ExtendedFlower {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient && !ids.isEmpty()) {
             for (int i = 0; i < ids.size(); i++) {
                 if (player.getMainHandStack().isIn(ItemTags.SHOVELS)) {
                     var id = ids.keySet().stream().toList().get(i);
                     var count = ids.values().stream().toList().get(i);
 
-                    var stack = new ItemStack(Registries.ITEM.get(new Identifier(id)), count);
+                    var stack = new ItemStack(Registries.ITEM.get(Identifier.of(id)), count);
                     var entity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack);
                     world.spawnEntity(entity);
                 }
@@ -109,7 +109,7 @@ public class AutumnAsters extends ExtendedFlower {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient) {
             ids.clear();
             if (player.isCreative()) {
@@ -118,7 +118,7 @@ public class AutumnAsters extends ExtendedFlower {
                 dropStacks(state, world, pos, null, player, player.getMainHandStack());
             }
         }
-        super.onBreak(world, pos, state, player);
+        return state;
     }
 
     protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -160,7 +160,7 @@ public class AutumnAsters extends ExtendedFlower {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, BlockEntitiesReg.AUTUMN_ASTERS_ENTITY, AutumnAstersEntity::tick);
+        return validateTicker(type, BlockEntitiesReg.AUTUMN_ASTERS_ENTITY, AutumnAstersEntity::tick);
     }
 
     @Override

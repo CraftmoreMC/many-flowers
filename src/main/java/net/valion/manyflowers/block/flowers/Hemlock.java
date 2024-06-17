@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
@@ -14,8 +15,9 @@ import net.minecraft.world.World;
 import static net.valion.manyflowers.ManyFlowers.CONFIG;
 
 public class Hemlock extends FlowerBlock {
-    public Hemlock(StatusEffect suspiciousStewEffect, int effectDuration, Settings settings) {
-        super(suspiciousStewEffect, effectDuration, settings);
+
+    public Hemlock(RegistryEntry<StatusEffect> stewEffect, float effectLengthInSeconds, Settings settings) {
+        super(stewEffect, effectLengthInSeconds, settings);
     }
 
     @Override

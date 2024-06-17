@@ -5,6 +5,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
@@ -42,21 +43,22 @@ public class AutumnAstersEntity extends BlockEntity {
         } else counter++;
     }
 
+
     @Override
-    protected void writeNbt(NbtCompound nbt) {
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
         nbt.putInt("mf.counter", counter);
         ids.forEach((id, count) -> {
             nbt.putString("mf.id", id);
             nbt.putInt("mf.count", count);
         });
-        super.writeNbt(nbt);
+        super.writeNbt(nbt, lookup);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
         nbt.getInt("mf.counter");
         nbt.getString("mf.id");
         nbt.getInt("mf.count");
-        super.readNbt(nbt);
+        super.readNbt(nbt, lookup);
     }
 }

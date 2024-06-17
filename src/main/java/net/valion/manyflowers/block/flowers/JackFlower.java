@@ -1,6 +1,5 @@
 package net.valion.manyflowers.block.flowers;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.tag.BlockTags;
@@ -20,7 +19,7 @@ import java.util.function.ToIntFunction;
 public class JackFlower extends FlowerBlock implements Fertilizable {
     public static final BooleanProperty LIT = Properties.LIT;
     public JackFlower() {
-        super(StatusEffects.FIRE_RESISTANCE, 0, FabricBlockSettings.create().mapColor(MapColor.DARK_GREEN).nonOpaque()
+        super(StatusEffects.FIRE_RESISTANCE, 0, AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).nonOpaque()
                 .noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).luminance(createLightLevelFromLitBlockState(15)));
         this.setDefaultState(this.getDefaultState().with(LIT, false));
     }
@@ -55,7 +54,7 @@ public class JackFlower extends FlowerBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return false;
     }
 

@@ -3,14 +3,16 @@ package net.valion.manyflowers.block.flowers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.valion.manyflowers.particle.FlowerParticles;
 
 public class SweetAlyssum extends FlowerBlock {
-    public SweetAlyssum(StatusEffect suspiciousStewEffect, int effectDuration, Settings settings) {
-        super(suspiciousStewEffect, effectDuration, settings);
+
+    public SweetAlyssum(RegistryEntry<StatusEffect> stewEffect, float effectLengthInSeconds, Settings settings) {
+        super(stewEffect, effectLengthInSeconds, settings);
     }
 
     @Override

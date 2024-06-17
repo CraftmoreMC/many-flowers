@@ -4,10 +4,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
@@ -17,14 +20,18 @@ import net.minecraft.world.World;
 import static net.valion.manyflowers.ManyFlowers.CONFIG;
 
 public class Gaillardia extends FlowerBlock {
-    public Gaillardia(StatusEffect suspiciousStewEffect, int effectDuration, Settings settings) {
-        super(suspiciousStewEffect, effectDuration, settings);
+
+    public Gaillardia(RegistryEntry<StatusEffect> stewEffect, float effectLengthInSeconds, Settings settings) {
+        super(stewEffect, effectLengthInSeconds, settings);
     }
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient && world.getDifficulty() != Difficulty.PEACEFUL && CONFIG.damage_gaillardia) {
-            if (!entity.isFireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
+            if (!entity.isFireImmune() && entity instanceof LivingEntity &&
+                    !EnchantmentHelper.getEnchantments(((LivingEntity) entity)
+                            .getEquippedStack(EquipmentSlot.FEET))
+                            .getEnchantments().contains(Enchantments.FROST_WALKER)) {
                 entity.damage(world.getDamageSources().inFire(), 1.0F);
             }
         }

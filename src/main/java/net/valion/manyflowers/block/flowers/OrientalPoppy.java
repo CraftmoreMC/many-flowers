@@ -5,6 +5,7 @@ import net.minecraft.block.FlowerBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
@@ -12,8 +13,9 @@ import net.minecraft.world.World;
 import static net.valion.manyflowers.ManyFlowers.CONFIG;
 
 public class OrientalPoppy extends FlowerBlock {
-    public OrientalPoppy(StatusEffect suspiciousStewEffect, int effectDuration, Settings settings) {
-        super(suspiciousStewEffect, effectDuration, settings);
+
+    public OrientalPoppy(RegistryEntry<StatusEffect> stewEffect, float effectLengthInSeconds, Settings settings) {
+        super(stewEffect, effectLengthInSeconds, settings);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.valion.manyflowers.block.flowers;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.FluidFillable;
@@ -8,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -23,9 +25,16 @@ import org.jetbrains.annotations.Nullable;
 
 import static net.valion.manyflowers.ManyFlowers.CONFIG;
 
-public class WaterHemlock extends PlantBlock implements Fertilizable, FluidFillable{
+public class WaterHemlock extends PlantBlock implements Fertilizable, FluidFillable {
+    private final static MapCodec<WaterHemlock> CODEC = createCodec(WaterHemlock::new);
+
     public WaterHemlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -51,7 +60,7 @@ public class WaterHemlock extends PlantBlock implements Fertilizable, FluidFilla
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return false;
     }
 
@@ -64,7 +73,7 @@ public class WaterHemlock extends PlantBlock implements Fertilizable, FluidFilla
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {}
 
     @Override
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
         return false;
     }
 
