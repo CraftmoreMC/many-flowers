@@ -44,7 +44,7 @@
   },
   "recommends": {
     "modmenu": ">=7.0.1",
-    "cloth-config": ">=11.0.99",
+    "cloth-config": ">=15.0.127",
     "patchouli": ">=1.21.1-81-FABRIC"
   }
 }
