@@ -1,5 +1,11 @@
 package net.valion.manyflowers.block.flowers;
 
+import eu.pb4.factorytools.api.block.FactoryBlock;
+import eu.pb4.factorytools.api.item.ModeledItem;
+import eu.pb4.factorytools.api.virtualentity.BlockModel;
+import eu.pb4.factorytools.api.virtualentity.ItemDisplayElementUtil;
+import eu.pb4.polymer.virtualentity.api.ElementHolder;
+import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -10,16 +16,19 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -30,18 +39,48 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldEvents;
 import net.valion.manyflowers.ManyFlowers;
+import net.valion.manyflowers.block.ManyFlowersBiomeTexturedBlockInterface;
 import net.valion.manyflowers.block.flowers.entity.AutumnAstersEntity;
 import net.valion.manyflowers.setup.BlockEntitiesReg;
 import org.jetbrains.annotations.Nullable;
 
 import static net.valion.manyflowers.block.flowers.entity.AutumnAstersEntity.ids;
 
-public class AutumnAsters extends ExtendedFlower {
+public class AutumnAsters extends ExtendedFlower implements ManyFlowersBiomeTexturedBlockInterface, FactoryBlock {
+    private static Item item;
+    private static Item item2;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     public static boolean canStill = true;
     public AutumnAsters(Settings settings) {
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(HALF, DoubleBlockHalf.LOWER));
+
+        item = new ModeledItem(Items.STONE, new Item.Settings());
+        item2 = new ModeledItem(Items.STONE, new Item.Settings());
+        Registry.register(Registries.ITEM, Identifier.of(ManyFlowers.MOD_ID, "block/asters_bottom"), item);
+        Registry.register(Registries.ITEM, Identifier.of(ManyFlowers.MOD_ID, "block/asters_top"), item2);
+    }
+
+    @Override
+    public @Nullable ElementHolder createElementHolder(ServerWorld world, BlockPos pos, BlockState state) {
+        if (state.get(HALF).equals(DoubleBlockHalf.LOWER))
+            return new FlowerModel();
+        else
+            return new FlowerModel2();
+    }
+
+    public static class FlowerModel extends BlockModel {
+        private FlowerModel(){
+            ItemDisplayElement itemDisplayElement = ItemDisplayElementUtil.createSimple(item);
+            this.addElement(itemDisplayElement);
+        }
+    }
+
+    public static class FlowerModel2 extends BlockModel {
+        private FlowerModel2(){
+            ItemDisplayElement itemDisplayElement = ItemDisplayElementUtil.createSimple(item2);
+            this.addElement(itemDisplayElement);
+        }
     }
 
     @Override

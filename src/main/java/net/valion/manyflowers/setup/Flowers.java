@@ -3,31 +3,31 @@ package net.valion.manyflowers.setup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.valion.manyflowers.ManyFlowers;
+import net.valion.manyflowers.block.ManyFlowersFlowerBlock;
+import net.valion.manyflowers.block.ManyFlowersModeledBlockItem;
+import net.valion.manyflowers.block.ManyFlowersTallFlowerBlock;
 import net.valion.manyflowers.block.flowers.*;
 
 public class Flowers {
 
     public static final Block ALSTROEMERIA_FLOWER = registerBlock("alstroemeria_flower",
-            new FlowerBlock(StatusEffects.SATURATION, 0,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()), ItemGroupSetup.MANY_FLOWERS);
+            new ManyFlowersFlowerBlock(StatusEffects.SATURATION, 0,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "alstroemeria_flower"), ItemGroupSetup.MANY_FLOWERS);
 
     public static final Block HYDRANGEA_FLOWER = registerBlock("hydrangea_flower",
-            new FlowerBlock(StatusEffects.WATER_BREATHING, 0,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()), ItemGroupSetup.MANY_FLOWERS);
+            new ManyFlowersFlowerBlock(StatusEffects.WATER_BREATHING, 0,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "hydrangea_flower"), ItemGroupSetup.MANY_FLOWERS);
 
     public static final Block MARIGOLD_FLOWER = registerBlock("marigold_flower",
-            new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 0,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()), ItemGroupSetup.MANY_FLOWERS);
+            new ManyFlowersFlowerBlock(StatusEffects.FIRE_RESISTANCE, 0,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "marigold_flower"), ItemGroupSetup.MANY_FLOWERS);
 
     public static final Block SWEET_ALYSSUM = registerBlock("sweet_alyssum",
             new SweetAlyssum(StatusEffects.ABSORPTION, 0,
@@ -60,8 +60,8 @@ public class Flowers {
                     (AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().breakInstantly().sounds(BlockSoundGroup.WET_GRASS))), ItemGroupSetup.MANY_FLOWERS);
 
     public static final Block DAISIES = registerBlock("daisies",
-            new FlowerBlock(StatusEffects.ABSORPTION, 0,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()), ItemGroupSetup.MANY_FLOWERS);
+            new ManyFlowersFlowerBlock(StatusEffects.ABSORPTION, 0,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "daisies"), ItemGroupSetup.MANY_FLOWERS);
 
     public static final Block VELVETS = registerBlock("velvets",
             new Velvets(AbstractBlock.Settings.copy(Blocks.DANDELION).sounds(BlockSoundGroup.WEEPING_VINES)), ItemGroupSetup.MANY_FLOWERS);
@@ -70,7 +70,7 @@ public class Flowers {
             new AutumnAsters(AbstractBlock.Settings.copy(Blocks.ROSE_BUSH)), ItemGroupSetup.MANY_FLOWERS);
 
     public static final Block ZINNIA = registerBlock("zinnia",
-            new TallFlowerBlock(AbstractBlock.Settings.copy(Blocks.ROSE_BUSH)), ItemGroupSetup.MANY_FLOWERS);
+            new ManyFlowersTallFlowerBlock(AbstractBlock.Settings.copy(Blocks.ROSE_BUSH), "zinnia"), ItemGroupSetup.MANY_FLOWERS);
 
     public static final Block AUTUMN_CROCUS = registerBlock("autumn_crocus",
             new AutumnCrocus(), ItemGroupSetup.MANY_FLOWERS);
@@ -85,7 +85,7 @@ public class Flowers {
 
     private static Item registerBlockItem(String name, Block block, RegistryKey<ItemGroup> group) {
         Item item = Registry.register(Registries.ITEM, Identifier.of(ManyFlowers.MOD_ID, name),
-                new BlockItem(block, new Item.Settings()));
+                new ManyFlowersModeledBlockItem(block, new Item.Settings(), Items.STICK));
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
         return item;
     }

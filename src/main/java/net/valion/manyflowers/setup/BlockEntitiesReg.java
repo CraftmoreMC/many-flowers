@@ -15,8 +15,8 @@ public class BlockEntitiesReg {
 
     public static void register() {
         VELVETS_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(ManyFlowers.MOD_ID, "velvets_entity"),
-                BlockEntityType.Builder.create(VelvetsBlockEntity::new, Flowers.VELVETS).build());
+                BlockEntityType.Builder.create(VelvetsBlockEntity::new, Flowers.VELVETS).build(null));
         AUTUMN_ASTERS_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(ManyFlowers.MOD_ID, "autumn_asters_entity"),
-                BlockEntityType.Builder.create(AutumnAstersEntity::new, Flowers.AUTUMN_ASTERS).build());
+                BlockEntityType.Builder.create(AutumnAstersEntity::new, Flowers.AUTUMN_ASTERS).build(null));
     }
 }

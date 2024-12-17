@@ -12,34 +12,35 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.valion.manyflowers.block.ManyFlowersFlowerBlock;
 import net.valion.manyflowers.block.plant.*;
 
 import static net.valion.manyflowers.ManyFlowers.MOD_ID;
 
 public class OreFlowers {
     public static final Block DIAMOND_FLOWER = registerBlock("diamond_flower",
-            new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
+            new ManyFlowersFlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "diamond_flower"));
 
     public static final Block COAL_FLOWER = registerBlock("coal_flower",
-            new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
+            new ManyFlowersFlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "coal_flower"));
 
     public static final Block IRON_FLOWER = registerBlock("iron_flower",
-            new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
+            new ManyFlowersFlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "iron_flower"));
 
     public static final Block GOLD_FLOWER = registerBlock("gold_flower",
-            new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
+            new ManyFlowersFlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "gold_flower"));
 
     public static final Block EMERALD_FLOWER = registerBlock("emerald_flower",
-            new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
+            new ManyFlowersFlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "emerald_flower"));
 
     public static final Block COPPER_FLOWER = registerBlock("copper_flower",
-            new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
-                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque()));
+            new ManyFlowersFlowerBlock(StatusEffects.FIRE_RESISTANCE, 3,
+                    AbstractBlock.Settings.copy(Blocks.DANDELION).nonOpaque(), "copper_flower"));
 
     //Plants//
     public static final Block DIAMOND_PLANT = registerBlockWithoutBlockItem("diamond_plant",
